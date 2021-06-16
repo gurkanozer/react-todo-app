@@ -1,4 +1,4 @@
-import { ADD_TODO, CLEAR_COMPLETED, REMOVE_TODO, UPDATE_TODO } from './actionTypes';
+import { ADD_TODO, CLEAR_COMPLETED, REMOVE_TODO, UPDATE_TODO, REORDER_TODOS } from './actionTypes';
 export default (state, action) => {
     switch (action.type) {
         case ADD_TODO:
@@ -20,6 +20,11 @@ export default (state, action) => {
             let stateAfterClear = state.filter(todo => !todo.checked);
             return stateAfterClear;
 
+        case REORDER_TODOS:
+            const items = Array.from(state);
+            const [reorderedItem] = items.splice(action.payload.source.index, 1);
+            items.splice(action.payload.destination.index, 0, reorderedItem);
+            return items;
         default:
             return state;
     }

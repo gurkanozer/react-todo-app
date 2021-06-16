@@ -8,7 +8,6 @@ import Footer from './components/Footer';
 
 import { ThemeProvider } from "styled-components";
 import { GlobalContext } from './context/globalState';
-
 const Container = styled.div`
     max-width:576px;
     width:100%;
@@ -33,10 +32,12 @@ const App = () => {
                 <GlobalStyle />
                 <Header />
                 <Form placeholder="Create a new todo..." />
+
                 <List />
+
                 <Footer />
             </Container>
-        </ThemeProvider>
+        </ThemeProvider >
     )
 }
 

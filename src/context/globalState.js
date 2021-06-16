@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import todoReducer from './todoReducer';
 import themeReducer from './themeReducer';
-import { ADD_TODO, REMOVE_TODO, UPDATE_TODO, CLEAR_COMPLETED, CHANGE_THEME } from './actionTypes';
+import { ADD_TODO, REMOVE_TODO, UPDATE_TODO, CLEAR_COMPLETED, CHANGE_THEME, REORDER_TODOS } from './actionTypes';
 import { darkTheme } from './themes';
 //Initial State
 const initialState = {
@@ -28,6 +28,9 @@ export const GlobalProvider = ({ children }) => {
     const clearCompleted = (payload) => {
         setTodos({ type: CLEAR_COMPLETED, payload });
     }
+    const reorderTodos = (payload) => {
+        setTodos({ type: REORDER_TODOS, payload });
+    }
     const changeTheme = (payload) => {
         setTheme({ type: CHANGE_THEME, payload });
     }
@@ -36,7 +39,7 @@ export const GlobalProvider = ({ children }) => {
         localStorage.setItem('theme', JSON.stringify(theme));
     }, [todos, theme]);
     return (
-        <GlobalContext.Provider value={{ todos, theme, addTodo, deleteTodo, updateTodo, clearCompleted, changeTheme }}>
+        <GlobalContext.Provider value={{ todos, theme, addTodo, deleteTodo, updateTodo, clearCompleted, changeTheme, reorderTodos }}>
             {children}
         </GlobalContext.Provider>
     )

@@ -3,9 +3,10 @@ import { ListContainer } from './style';
 import ListItem from '../ListItem';
 import ListFooter from '../ListFooter';
 import { GlobalContext } from '../../context/globalState';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 const List = () => {
-    const { deleteTodo, updateTodo, clearCompleted, todos } = useContext(GlobalContext);
+    const { deleteTodo, updateTodo, clearCompleted, reorderTodos, todos } = useContext(GlobalContext);
     const [todoList, setTodoList] = useState(todos);
     const handleChange = (data) => {
         let updatedTodo = { ...data, checked: !data.checked };
@@ -30,17 +31,31 @@ const List = () => {
             setTodoList(filtered);
         }
     }
-
+    const handleOnDragEnd = (result) => {
+        reorderTodos(result);
+    }
     useEffect(() => {
         setTodoList(todos);
     }, [todos]);
     return (
-        <ListContainer>
-            {todoList.map((todo, index) => (
-                <ListItem todo={todo} onChange={handleChange} onClick={handleDelete} key={index} />
-            ))}
-            <ListFooter filterList={handleFilter} clearCompleted={handleClearCompleted} count={todos.length} />
-        </ListContainer>
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+            <Droppable droppableId="todos">
+                {(provided) => (
+                    <ListContainer  {...provided.droppableProps} ref={provided.innerRef}>
+                        {todoList.map((todo, index) => (
+
+                            <Draggable key={todo.id} draggableId={todo.id} index={index}>
+                                {(provided) => (
+                                    <ListItem provided={provided} todo={todo} onChange={handleChange} onClick={handleDelete} key={index} />
+                                )}
+                            </Draggable>
+                        ))}
+                        {provided.placeholder}
+                        <ListFooter filterList={handleFilter} clearCompleted={handleClearCompleted} count={todos.length} />
+                    </ListContainer>
+                )}
+            </Droppable>
+        </DragDropContext>
     )
 }
 
