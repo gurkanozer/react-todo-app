@@ -5,6 +5,10 @@ export const lightTheme = {
         textColor: "hsl(236, 9%, 61%)",
         textColorSecondary: "hsl(235, 19%, 35%)",
         bgColor: "hsl(0, 0%, 98%)"
+    },
+    images:{
+        bgMobile:"url('/images/bg-mobile-light.jpg')",
+        bgDesktop:"url('/images/bg-desktop-light.jpg')"
     }
 }
 
@@ -15,5 +19,9 @@ export const darkTheme = {
         textColor: "hsl(234, 11%, 52%)",
         textColorSecondary: "hsl(233, 14%, 35%)",
         bgColor: "hsl(235, 24%, 19%)"
+    },
+    images:{
+        bgMobile:"url('/images/bg-mobile-dark.jpg')",
+        bgDesktop:"url('/images/bg-desktop-dark.jpg')"
     }
 }

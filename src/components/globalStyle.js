@@ -18,11 +18,12 @@ const GlobalStyle = createGlobalStyle`
     }
     body{
         font-family: 'Josefin Sans', sans-serif;
-        background: url('/images/bg-mobile-dark.jpg') no-repeat;
+        background-image: ${({theme})=> theme.images.bgMobile};
+        background-repeat:no-repeat;
         background-size: 100% 200px;
         background-color:var(--themeBg);
         @media (min-width:576px){
-            background: url('/images/bg-desktop-dark.jpg') no-repeat;
+        background-image: ${({theme})=> theme.images.bgDesktop};
             background-size: 100% 300px;
             background-color:var(--themeBg); 
         }
