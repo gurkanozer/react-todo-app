@@ -1,5 +1,5 @@
 import { ADD_TODO, CLEAR_COMPLETED, REMOVE_TODO, UPDATE_TODO, REORDER_TODOS } from './actionTypes';
-export default (state, action) => {
+const todoReducer (state, action) => {
     switch (action.type) {
         case ADD_TODO:
             return [
@@ -29,3 +29,4 @@ export default (state, action) => {
             return state;
     }
 }
+export default todoReducer;
