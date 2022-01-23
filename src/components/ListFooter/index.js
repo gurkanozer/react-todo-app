@@ -7,6 +7,11 @@ const ListFooter = ({ filterList, clearCompleted, count }) => {
         setActiveLink(filter);
         filterList(filter);
     }
+    const handleClear = () => {
+        clearCompleted();
+        setActiveLink("all");
+        filterList("all");
+    }
     return (
         <ListFooterContainer>
             <ListFooterSpan>{count} items left</ListFooterSpan>
@@ -15,7 +20,7 @@ const ListFooter = ({ filterList, clearCompleted, count }) => {
                 <MenuItem><MenuLink className={activeLink === "active" ? "active" : ""} onClick={() => handleClick("active")}>Active</MenuLink></MenuItem>
                 <MenuItem><MenuLink className={activeLink === "completed" ? "active" : ""} onClick={() => handleClick("completed")}>Completed</MenuLink></MenuItem>
             </ListFooterMenu>
-            <ListFooterButton onClick={clearCompleted}>Clear Completed</ListFooterButton>
+            <ListFooterButton onClick={()=>{handleClear()}}>Clear Completed</ListFooterButton>
         </ListFooterContainer >
     )
 }
